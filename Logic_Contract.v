@@ -257,3 +257,5 @@ Proof.
           unfold inter, union, SubsetEq, compl, In).
           tauto.
 Qed.
+
+End domain_defined.
