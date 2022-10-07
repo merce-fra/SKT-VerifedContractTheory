@@ -1,5 +1,6 @@
 Require Sets.
 Require Import Contracts.
+Require Import Logic_Contract.
 
 (** It should be already defined in the std lib *)
 Lemma eq_dec_nat : forall x y : nat, {x = y} + {x <> y}.
@@ -29,12 +30,9 @@ Axiom in_dec_ident : forall (v : ident) (d : domain), {v ∈ d} + {v ∉ d}.
     e.g. { x : ident | x ∈ Vars }
 *)
 
-Instance theo : Theory := {
+Instance bt : Base_Types := {
   ident := nat ; (* Rename V -> varid ? *)
-  B := Prop ;  (* Why B? for Boolean ?*)
-  any_B := True ;
-  eq_dec_ident := eq_dec_nat ;
-  in_dec_ident := in_dec_ident ;
+  value := Prop ;  (* Why B? for Boolean ?*)
 }.
 
 
@@ -45,7 +43,12 @@ Inductive expr {d : domain} : Type :=
   | f_not : expr -> expr
   | f_and : expr -> expr -> expr.
 
-Definition state (d : domain) : Type :=  forall x : var d, B.
+Definition state (d : domain) : Type :=  forall x : var d, value.
+
+Definition f_or {d : domain} (f1 f2 : expr) := @f_not d (f_and (f_not f1) (f_not f2)).
+
+Definition f_eq {d : domain} (f_1 : expr) (f_2 : expr) := @f_or d (f_and f_1 f_2) (f_and (f_not f_1)
+  (f_not f_2)).
 
 (** Useful for establishing the decidability of formulas satisfiability *)
 Axiom state_eval : forall {d : domain} (s : state d) (x : var d), {s x} + {~s x}.
@@ -121,6 +124,12 @@ Proof.
   destruct (sat_unsat_dec s f) as [sat_dec _].
   exact sat_dec.
 Defined.
+
+Lemma sat_dec_prop: forall {d : domain} (s: state d) f, sat s f \/ ~ sat s f.
+Proof.
+  intros.
+  case (sat_dec s f) ; tauto.
+Qed.
 
 Lemma unsat_dec: forall {d : domain} (s: state d) f, { unsat s f } + { ~ unsat s f }.
 Proof.
@@ -225,6 +234,25 @@ Qed.
 
 Definition state_predicate {vs: domain} (f: expr) : assertion vs :=
   fun e => sat e f.
+
+Section theo_instances.
+  Instance theo : Theory bt := {
+  any_value := True ;
+  eq_dec_ident := eq_dec_nat ;
+  in_dec_ident := in_dec_ident ;
+  }.
+
+Instance lf : AG_ContractF bt (@expr) := {
+  e_and := @f_and ;
+  e_or := @f_or ;
+  e_not := @f_not ;
+  sat := @sat ;
+  sat_e_not := @not_sat_not ;
+  sat_e_and := @and_sat_and ;
+  sat_e_or := @or_sat_or ;
+  sat_dec := @sat_dec_prop ;
+  }.
+End theo_instances.
 
 (* Example *) 
 Definition id1 : ident := 1.
@@ -356,27 +384,3 @@ Proof.
     tauto.
 Qed.
 
-Module Contracts.
-
-  Definition t { vs: domain } : Type := (@expr vs) * (@expr vs).
-
-  Definition behavior ( vs: domain ) : Type := @τ (state vs).
-
-  Definition bsat { vs: domain } (bh: behavior vs) f : Prop :=
-    forall s: state vs, s ∈ bh -> sat s f.
-
-  Definition sat { vs: domain } (bh: behavior vs) (c: t) :=
-    let (a, g) := c in
-      bsat bh a -> bsat bh g.
-
-  Definition refines vs c1 c2 : Prop :=
-    forall bh: behavior vs, sat bh c1 -> sat bh c2.
-  End Contracts.
-
-
-  (*Definition convert {vs: vst} (c : @t vs) contract:= *)
-  (*  let (a, g) := c in *)
-      
-  (*(1** Our refinement complies with Benveniste's Meta-Theory *1) *)
-  (*Definition refines_soundness : forall c1 c2, *)
-  (*    refines c1 c2 <-> contracts.refines (convert c1) (convert c2). *)

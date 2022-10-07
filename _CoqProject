@@ -1,0 +1,9 @@
+-R VCT VCT
+-R Coq-dL CoqDL
+-R Coq-dL/coq-tools CoqDL.util
+-R Coq-dL/syntax CoqDL.syntax
+-R Coq-dL/semantics CoqDL.semantics
+-R Coq-dL/substitution CoqDL.substitution
+-R Coq-dL/axioms CoqDL.axioms
+-R Coq-dL/checker CoqDL.checker
+-R Coq-dL/examples CoqDL.examples

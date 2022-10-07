@@ -17,6 +17,7 @@
 
 Require Import FunctionalExtensionality.
 Require Import PropExtensionality.
+Require Import List.
 Class Discr(Γ: Type) := {
       eq_dec : forall x y: Γ, { x = y } + { x <> y }
   }.
@@ -123,6 +124,21 @@ Module CoqSet.
     forall s: @τ Γ,     s ⊆ Univ.
   Proof.
     firstorder.
+  Qed.
+
+  Definition is_empty {Γ: Type} (s : τ) :=
+    forall x: Γ, x ∉ s.
+
+  Definition is_not_empty {Γ: Type} (s : τ) :=
+    exists x: Γ, x ∈ s.
+
+  Theorem is_not_empty_neg_empty {Γ: Type} (s : τ) :
+    is_not_empty s -> ~ @is_empty Γ s.
+  Proof.
+    unfold is_not_empty, is_empty.
+    intros [x x_in_s] H.
+    specialize (H x x_in_s).
+    contradiction.
   Qed.
 
   (** Boolean [union] and [inter]section *)
@@ -362,6 +378,125 @@ Module CoqSet.
     destruct (eq_dec x y);
       firstorder.
   Qed.
+
+  Section Classical.
+
+Require Import Classical.
+
+Lemma morgan {Γ: Type} : forall a b : @τ  Γ, ¬ a ∩ ¬ b = ¬ (a ∪ b).
+Proof.
+  intros.
+  apply Eq_extensionality.
+  firstorder.
+Qed.
+
+Lemma morgan2 {Γ: Type}: forall a b : @τ  Γ, ¬ (a ∩ b) = ¬ a ∪ ¬ b.
+Proof.
+  intros.
+  apply Eq_extensionality.
+  split ; try firstorder.
+  case classic with (x ∈ a).
+  intro.
+  right.
+  tauto.
+  left.
+  tauto.
+Qed.
+
+Lemma inter_commut_eq {Γ: Type} : forall s₁ s₂: @τ  Γ, s₁ ∩ s₂ = s₂ ∩ s₁.
+Proof.
+  intros.
+  apply Eq_extensionality.
+  firstorder.
+Qed.
+
+Lemma inter_distrib {Γ: Type} : forall a b c : @τ  Γ, a ∩ (b ∪ c) = (a ∩ b) ∪ (a ∩ c).
+Proof.
+  intros.
+  apply Eq_extensionality.
+  firstorder.
+Qed.
+
+Lemma inter_anoa {Γ: Type} : forall a : @τ  Γ, a ∩ ¬ a = emptyset.
+Proof.
+  intros.
+  apply Eq_extensionality.
+  firstorder.
+Qed.
+
+Lemma comp_comp {Γ: Type} : forall a : @τ  Γ, ¬ (¬ a) = a.
+Proof.
+  intro.
+  apply Eq_extensionality.
+  split ;
+  case classic with (x ∈ a) ; firstorder.
+Qed.
+
+Lemma union_distrib {Γ: Type} : forall (a b c : @τ  Γ), (a ∩ b) ∪ c = (a ∪ c) ∩ (b ∪ c).
+Proof.
+  intros.
+  apply Eq_extensionality.
+  firstorder.
+Qed.
+
+Lemma union_anoa {Γ: Type} : forall a : @τ  Γ, a ∪ ¬ a = Univ.
+Proof.
+  intros.
+  apply Eq_extensionality.
+  split.
+  firstorder.
+  firstorder.
+  case classic with (x ∈ a) ; firstorder.
+Qed.
+
+Lemma inter_univ {Γ: Type} : forall a : @τ  Γ, a ∩ Univ = a.
+Proof.
+  intros.
+  apply Eq_extensionality.
+  firstorder.
+Qed.
+
+Lemma inter_abac {Γ: Type} : forall (a b c : @τ  Γ), a ∩ b ∩ a ∩ c = a ∩ (b ∩ c).
+Proof.
+  intros.
+  apply Eq_extensionality.
+  firstorder.
+Qed.
+
+Lemma inter_inter_commut {Γ: Type} : forall (a b c : @τ  Γ), a ∩ (b ∩ c) = a ∩ (c ∩ b).
+Proof.
+  intros.
+  apply Eq_extensionality.
+  firstorder.
+Qed.
+
+Lemma inter_union_abb {Γ: Type} : forall (a b : @τ  Γ), (a ∩ b) ∪ b =  b.
+Proof.
+  intros.
+  apply Eq_extensionality.
+  firstorder.
+Qed.
+
+Lemma inter_monotonic_lr {Γ: Type} : forall (a b c d : @τ  Γ), a ⊆ b -> c ⊆ d -> a ∩ c ⊆ b ∩ d.
+Proof.
+  firstorder.
+Qed.
+
+Lemma inter_assoc_eq {Γ: Type} : forall (a b c : @τ  Γ), a ∩ b ∩ c = a ∩ (b ∩ c).
+Proof.
+  intros.
+  apply Eq_extensionality.
+  firstorder.
+Qed.
+  End Classical.
+
+  Section Finite.
+    Axiom Finite : forall {Γ : Type}  (s: @τ Γ),  Prop.
+    Axiom elements_of : forall {Γ : Type} (s : @τ Γ) (fs : Finite s),
+      list Γ.
+    Axiom Enum : forall (Γ : Type) (s : @τ Γ) (fs : Finite s),
+      let l := elements_of s fs in forall (x : Γ), x ∈ s <-> List.In x l.
+  End Finite.
 
 End CoqSet.
 (* Set.v ends here *)

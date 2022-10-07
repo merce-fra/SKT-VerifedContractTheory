@@ -1,0 +1,8 @@
+-R coq-tools CoqDL.util
+-R syntax CoqDL.syntax
+-R semantics CoqDL.semantics
+-R substitution CoqDL.substitution
+-R axioms CoqDL.axioms
+-R checker CoqDL.checker
+-R examples CoqDL.examples
+-R . CoqDL

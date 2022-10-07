@@ -1,0 +1,275 @@
+Wed 27 Oct 2021 05:08:14 PM CEST
+===============================
+++++++ file: all
+++ new dependency: examples/example1
+++ new dependency: examples/example2
+++ new dependency: examples/DI_and
+++ new dependency: examples/DI_or
+===============================
+++++++ file: examples/example1
+notation doesn't exist
+++ new dependency: checker/checker
+===============================
+++++++ file: examples/example2
+++ not new dependency: checker/checker
+===============================
+++++++ file: examples/DI_and
+++ not new dependency: checker/checker
+===============================
+++++++ file: examples/DI_or
+++ not new dependency: checker/checker
+===============================
+++++++ file: checker/checker
+++ new dependency: substitution/soundness
+++ new dependency: substitution/swapping
+++ new dependency: axioms/DDLaxioms
+++ new dependency: axioms/differential_axioms
+++ new dependency: axioms/differential_invariant
+++ new dependency: syntax/decidability
+===============================
+++++++ file: substitution/soundness
+Coquelicot.Coquelicot doesn't exist
+++ new dependency: substitution/US_lemmas
+===============================
+++++++ file: substitution/swapping
+++ not new dependency: substitution/soundness
+===============================
+++++++ file: axioms/DDLaxioms
+Classical_Prop doesn't exist
+++ not new dependency: substitution/soundness
+===============================
+++++++ file: axioms/differential_axioms
+++ not new dependency: substitution/soundness
+++ new dependency: axioms/integral
+===============================
+++++++ file: axioms/differential_invariant
+++ not new dependency: substitution/soundness
+++ new dependency: axioms/differential
+++ not new dependency: axioms/integral
+===============================
+++++++ file: syntax/decidability
+++ new dependency: syntax/terms_util2
+===============================
+++++++ file: substitution/US_lemmas
+++ new dependency: substitution/adjoint_interpretation
+===============================
+++++++ file: axioms/integral
+Coquelicot.Coquelicot doesn't exist
+Reals doesn't exist
+Psatz doesn't exist
+mathcomp.ssreflect.ssreflect doesn't exist
+mathcomp.ssreflect.ssrbool doesn't exist
+mathcomp.ssreflect.eqtype doesn't exist
+mathcomp.ssreflect.seq doesn't exist
+Coquelicot.Markov doesn't exist
+Coquelicot.Rcomplements doesn't exist
+Coquelicot.Rbar doesn't exist
+Coquelicot.Lub doesn't exist
+Coquelicot.Lim_seq doesn't exist
+Coquelicot.Derive doesn't exist
+Coquelicot.SF_seq doesn't exist
+Coquelicot.Continuity doesn't exist
+Coquelicot.Hierarchy doesn't exist
+Coquelicot.Seq_fct doesn't exist
+Coquelicot.RInt doesn't exist
+Coquelicot.PSeries doesn't exist
+++ new dependency: syntax/reals_util
+++ new dependency: semantics/deriv_util
+===============================
+++++++ file: axioms/differential
+Coquelicot.Coquelicot doesn't exist
+++ not new dependency: substitution/US_lemmas
+===============================
+++++++ file: syntax/terms_util2
+Omega doesn't exist
+++ new dependency: syntax/terms_util
+===============================
+++++++ file: substitution/adjoint_interpretation
+++ new dependency: substitution/US
+++ new dependency: substitution/US_defs
+++ new dependency: semantics/static_sem_lemmas
+++ new dependency: substitution/lookup_lemmas
+++ new dependency: substitution/admissible_terms
+++ new dependency: substitution/eassignables_terms
+++ not new dependency: substitution/lookup_lemmas
+++ new dependency: syntax/list_util
+++ new dependency: semantics/coincidence
+++ new dependency: semantics/bound_effect
+++ new dependency: semantics/dynamic_semantics_prop
+===============================
+++++++ file: syntax/reals_util
+Reals doesn't exist
+Coquelicot.Rcomplements doesn't exist
+++ new dependency: coq-tools/tactics2
+===============================
+++++++ file: semantics/deriv_util
+Coquelicot.Derive doesn't exist
+Eqdep_dec doesn't exist
+Omega doesn't exist
+++ new dependency: syntax/tactics_util
+++ not new dependency: syntax/reals_util
+===============================
+++++++ file: syntax/terms_util
+Derive doesn't exist
+++ new dependency: syntax/expressions
+++ new dependency: syntax/symbol_lemmas
+++ new dependency: syntax/vec_util
+===============================
+++++++ file: substitution/US
+List doesn't exist
+++ new dependency: semantics/static_sem
+++ not new dependency: coq-tools/tactics2
+++ not new dependency: syntax/terms_util2
+===============================
+++++++ file: substitution/US_defs
+++ not new dependency: substitution/US
+===============================
+++++++ file: semantics/static_sem_lemmas
+++ not new dependency: semantics/static_sem
+++ new dependency: semantics/dynamic_semantics
+++ not new dependency: syntax/terms_util2
+++ not new dependency: syntax/list_util
+===============================
+++++++ file: substitution/lookup_lemmas
+++ not new dependency: semantics/static_sem_lemmas
+++ not new dependency: substitution/US
+===============================
+++++++ file: substitution/admissible_terms
+++ new dependency: substitution/eassignables_subterm
+===============================
+++++++ file: substitution/eassignables_terms
+++ not new dependency: substitution/eassignables_subterm
+===============================
+++++++ file: syntax/list_util
+Coq.Lists.List doesn't exist
+Omega doesn't exist
+++ not new dependency: coq-tools/tactics2
+++ not new dependency: syntax/tactics_util
+===============================
+++++++ file: semantics/coincidence
+++ not new dependency: semantics/static_sem_lemmas
+++ new dependency: semantics/ext_interpretation
+===============================
+++++++ file: semantics/bound_effect
+++ not new dependency: semantics/static_sem_lemmas
+===============================
+++++++ file: semantics/dynamic_semantics_prop
+++ not new dependency: semantics/dynamic_semantics
+++ new dependency: semantics/semantics_util
+++ not new dependency: syntax/terms_util2
+++ not new dependency: syntax/list_util
+===============================
+++++++ file: coq-tools/tactics2
+++ new dependency: coq-tools/UsefulTypes
+===============================
+++++++ file: syntax/tactics_util
+++ not new dependency: coq-tools/tactics2
+===============================
+++++++ file: syntax/expressions
+String doesn't exist
+Reals doesn't exist
+Coq.Lists.List doesn't exist
+Vector doesn't exist
+++ new dependency: syntax/symbol
+===============================
+++++++ file: syntax/symbol_lemmas
+++ not new dependency: syntax/symbol
+++ not new dependency: syntax/list_util
+++ not new dependency: syntax/tactics_util
+++ not new dependency: syntax/reals_util
+===============================
+++++++ file: syntax/vec_util
+Coq.Lists.List doesn't exist
+Omega doesn't exist
+Vector doesn't exist
+mathcomp.ssreflect.ssreflect doesn't exist
+++ not new dependency: syntax/tactics_util
+===============================
+++++++ file: semantics/static_sem
+++ not new dependency: syntax/terms_util
+++ not new dependency: semantics/semantics_util
+++ new dependency: semantics/fcset
+++ new dependency: semantics/eassignables
+++ new dependency: semantics/free_vars_term
+===============================
+++++++ file: semantics/dynamic_semantics
+++ not new dependency: syntax/expressions
+++ not new dependency: semantics/semantics_util
+++ not new dependency: syntax/terms_util
+++ not new dependency: semantics/deriv_util
+++ new dependency: syntax/state
+++ not new dependency: semantics/free_vars_term
+===============================
+++++++ file: substitution/eassignables_subterm
+++ not new dependency: semantics/static_sem_lemmas
+++ not new dependency: substitution/US
+===============================
+++++++ file: semantics/ext_interpretation
+FunctionalExtensionality doesn't exist
+++ not new dependency: semantics/static_sem
+++ not new dependency: semantics/dynamic_semantics
+===============================
+++++++ file: semantics/semantics_util
+Derive doesn't exist
+FunctionalExtensionality doesn't exist
+++ not new dependency: syntax/list_util
+++ not new dependency: syntax/vec_util
+++ not new dependency: syntax/reals_util
+++ not new dependency: syntax/symbol_lemmas
+++ not new dependency: semantics/deriv_util
+++ not new dependency: syntax/state
+===============================
+++++++ file: coq-tools/UsefulTypes
+Coq.Init.Notations doesn't exist
+Peano doesn't exist
+Basics doesn't exist
+Bool doesn't exist
+Arith doesn't exist
+Arith.EqNat doesn't exist
+Omega doesn't exist
+Eqdep doesn't exist
+Coq.Logic.Eqdep_dec doesn't exist
+++ new dependency: coq-tools/tactics
+===============================
+++++++ file: syntax/symbol
+String doesn't exist
+Reals doesn't exist
+Coq.Lists.List doesn't exist
+===============================
+++++++ file: semantics/fcset
+++ not new dependency: syntax/symbol_lemmas
+===============================
+++++++ file: semantics/eassignables
+++ not new dependency: semantics/fcset
+===============================
+++++++ file: semantics/free_vars_term
+++ not new dependency: syntax/terms_util
+===============================
+++++++ file: syntax/state
+++ not new dependency: syntax/symbol_lemmas
+++ not new dependency: syntax/tactics_util
+===============================
+++++++ file: coq-tools/tactics
+Coq.Lists.List doesn't exist
+Coq.Program.Tactics doesn't exist
+String. doesn't exist
+Open doesn't exist
+Scope doesn't exist
+string_scope doesn't exist
+Omega doesn't exist
+++ new dependency: coq-tools/eq_rel
+++ new dependency: coq-tools/LibTactics
+===============================
+++++++ file: coq-tools/eq_rel
+Coq.Setoids.Setoid doesn't exist
+++ new dependency: coq-tools/universe
+===============================
+++++++ file: coq-tools/LibTactics
+Coq.Lists.List doesn't exist
+Coq.PArith.BinPos doesn't exist
+Coq.ZArith.BinInt doesn't exist
+ProofIrrelevance doesn't exist
+Coq.Program.Equality doesn't exist
+===============================
+++++++ file: coq-tools/universe
+++++++ no more files
